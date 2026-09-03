@@ -1,0 +1,35 @@
+{
+  "contract_version": "1.1.0",
+  "dataset_id": "synthetic.pair-bars",
+  "dataset_version": "1.0.0",
+  "extensions": {},
+  "generated_at": "2026-01-01T00:00:00Z",
+  "public_or_synthetic": true,
+  "streams": [
+    {
+      "data_sha256": "e0301171371c04907e5c2613e0cb06e44e908a2733637cdd104bf55d1de36426",
+      "fields": [
+        "close",
+        "high",
+        "low",
+        "open",
+        "volume"
+      ],
+      "kind": "bar",
+      "record_count": 20,
+      "schema_sha256": "f58dbc46db0cc5c40fc318557cb937277e01a3d9fa0ab04c10b074a18893146c",
+      "stream_id": "bars",
+      "symbols": [
+        "SYNTH.PAIR-A",
+        "SYNTH.PAIR-B"
+      ],
+      "timeframe": {
+        "alignment": "epoch",
+        "calendar": "24/7",
+        "interval": "P1D",
+        "mode": "bar",
+        "timezone": "UTC"
+      }
+    }
+  ]
+}

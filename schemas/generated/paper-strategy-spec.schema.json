@@ -1,0 +1,364 @@
+{
+  "$defs": {
+    "ActionKind": {
+      "enum": [
+        "cancel_order",
+        "no_op",
+        "prediction",
+        "replace_order",
+        "submit_order",
+        "target_position",
+        "target_weight"
+      ],
+      "title": "ActionKind",
+      "type": "string"
+    },
+    "DataKind": {
+      "enum": [
+        "bar",
+        "book_delta_l2",
+        "book_snapshot_l2",
+        "corporate_action",
+        "custom",
+        "instrument_status",
+        "mbo_event",
+        "quote_l1",
+        "trade"
+      ],
+      "title": "DataKind",
+      "type": "string"
+    },
+    "DataRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "depth": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Depth"
+        },
+        "kind": {
+          "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataKind"
+        },
+        "lookback": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Lookback",
+          "type": "integer"
+        },
+        "max_staleness_ns": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Staleness Ns"
+        },
+        "optional_fields": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Optional Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "required_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Fields",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "stream_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Stream Id",
+          "type": "string"
+        },
+        "symbols": {
+          "default": [],
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+            "type": "string"
+          },
+          "title": "Symbols",
+          "type": "array"
+        },
+        "timeframe": {
+          "$ref": "https://psrc.dev/schema/1.1.0/definitions/Timeframe"
+        }
+      },
+      "required": [
+        "kind",
+        "required_fields",
+        "stream_id",
+        "timeframe"
+      ],
+      "title": "DataRequirement",
+      "type": "object"
+    },
+    "PaperAmbiguity": {
+      "additionalProperties": false,
+      "properties": {
+        "ambiguity_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+          "title": "Ambiguity Id",
+          "type": "string"
+        },
+        "resolution": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolution"
+        },
+        "resolved_by": {
+          "anyOf": [
+            {
+              "enum": [
+                "experiment",
+                "operator",
+                "paper"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolved By"
+        },
+        "severity": {
+          "enum": [
+            "blocking",
+            "info",
+            "warning"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "source_excerpt_locator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Excerpt Locator"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ambiguity_id",
+        "severity",
+        "statement"
+      ],
+      "title": "PaperAmbiguity",
+      "type": "object"
+    },
+    "PaperReference": {
+      "additionalProperties": false,
+      "properties": {
+        "citation": {
+          "title": "Citation",
+          "type": "string"
+        },
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "citation",
+        "locator",
+        "title"
+      ],
+      "title": "PaperReference",
+      "type": "object"
+    },
+    "StrategyKind": {
+      "enum": [
+        "reinforcement_learning",
+        "rule",
+        "supervised"
+      ],
+      "title": "StrategyKind",
+      "type": "string"
+    },
+    "Timeframe": {
+      "additionalProperties": false,
+      "properties": {
+        "alignment": {
+          "default": "epoch",
+          "title": "Alignment",
+          "type": "string"
+        },
+        "calendar": {
+          "default": "24/7",
+          "title": "Calendar",
+          "type": "string"
+        },
+        "interval": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "ISO-8601 duration, e.g. PT1M or P1D",
+          "title": "Interval"
+        },
+        "mode": {
+          "$ref": "https://psrc.dev/schema/1.1.0/definitions/TimeframeMode"
+        },
+        "timezone": {
+          "default": "UTC",
+          "title": "Timezone",
+          "type": "string"
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "title": "Timeframe",
+      "type": "object"
+    },
+    "TimeframeMode": {
+      "enum": [
+        "bar",
+        "event"
+      ],
+      "title": "TimeframeMode",
+      "type": "string"
+    }
+  },
+  "$id": "https://psrc.dev/schema/1.1.0/paper-strategy-spec.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "ambiguities": {
+      "default": [],
+      "items": {
+        "$ref": "https://psrc.dev/schema/1.1.0/definitions/PaperAmbiguity"
+      },
+      "title": "Ambiguities",
+      "type": "array"
+    },
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "data_requirements": {
+      "items": {
+        "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataRequirement"
+      },
+      "title": "Data Requirements",
+      "type": "array"
+    },
+    "execution_assumptions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Execution Assumptions",
+      "type": "array"
+    },
+    "feature_definitions": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Feature Definitions",
+      "type": "array"
+    },
+    "hypothesis": {
+      "title": "Hypothesis",
+      "type": "string"
+    },
+    "label_definition": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Label Definition"
+    },
+    "output_actions": {
+      "items": {
+        "$ref": "https://psrc.dev/schema/1.1.0/definitions/ActionKind"
+      },
+      "title": "Output Actions",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "reference": {
+      "$ref": "https://psrc.dev/schema/1.1.0/definitions/PaperReference"
+    },
+    "reward_definition": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reward Definition"
+    },
+    "spec_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Spec Id",
+      "type": "string"
+    },
+    "strategy_kind": {
+      "$ref": "https://psrc.dev/schema/1.1.0/definitions/StrategyKind"
+    }
+  },
+  "required": [
+    "data_requirements",
+    "execution_assumptions",
+    "hypothesis",
+    "output_actions",
+    "reference",
+    "spec_id",
+    "strategy_kind"
+  ],
+  "title": "PaperStrategySpec",
+  "type": "object"
+}

@@ -1,0 +1,187 @@
+{
+  "$defs": {
+    "CompatibilityRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "affected_records": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Affected Records",
+          "type": "integer"
+        },
+        "disableable": {
+          "const": true,
+          "default": true,
+          "title": "Disableable",
+          "type": "boolean"
+        },
+        "input_schema_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Input Schema Sha256"
+        },
+        "output_schema_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Schema Sha256"
+        },
+        "parameters": {
+          "additionalProperties": true,
+          "title": "Parameters",
+          "type": "object"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "result": {
+          "$ref": "https://psrc.dev/schema/1.1.0/definitions/CompatibilityResult"
+        },
+        "reversible": {
+          "title": "Reversible",
+          "type": "boolean"
+        },
+        "transformation_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transformation Id"
+        },
+        "transformation_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Transformation Version"
+        }
+      },
+      "required": [
+        "rationale",
+        "result",
+        "reversible"
+      ],
+      "title": "CompatibilityRecord",
+      "type": "object"
+    },
+    "CompatibilityResult": {
+      "enum": [
+        "EXACT",
+        "TRANSFORMED_LOSSLESS",
+        "TRANSFORMED_LOSSY",
+        "UNSUPPORTED"
+      ],
+      "title": "CompatibilityResult",
+      "type": "string"
+    }
+  },
+  "$id": "https://psrc.dev/schema/1.1.0/execution-plan.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "compatibility": {
+      "items": {
+        "$ref": "https://psrc.dev/schema/1.1.0/definitions/CompatibilityRecord"
+      },
+      "title": "Compatibility",
+      "type": "array"
+    },
+    "compiled_at": {
+      "format": "date-time",
+      "title": "Compiled At",
+      "type": "string"
+    },
+    "contract_version": {
+      "default": "1.1.0",
+      "title": "Contract Version",
+      "type": "string"
+    },
+    "dataset_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Dataset Id",
+      "type": "string"
+    },
+    "dataset_manifest_sha256": {
+      "title": "Dataset Manifest Sha256",
+      "type": "string"
+    },
+    "engine_capabilities_sha256": {
+      "title": "Engine Capabilities Sha256",
+      "type": "string"
+    },
+    "engine_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Engine Id",
+      "type": "string"
+    },
+    "run_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "run_policy_sha256": {
+      "title": "Run Policy Sha256",
+      "type": "string"
+    },
+    "strategy_code_evidence_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[a-f0-9]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Strategy Code Evidence Sha256"
+    },
+    "strategy_id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.:/-]{0,127}$",
+      "title": "Strategy Id",
+      "type": "string"
+    },
+    "strategy_manifest_sha256": {
+      "title": "Strategy Manifest Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "compatibility",
+    "compiled_at",
+    "dataset_id",
+    "dataset_manifest_sha256",
+    "engine_capabilities_sha256",
+    "engine_id",
+    "run_id",
+    "run_policy_sha256",
+    "strategy_id",
+    "strategy_manifest_sha256"
+  ],
+  "title": "ExecutionPlan",
+  "type": "object"
+}

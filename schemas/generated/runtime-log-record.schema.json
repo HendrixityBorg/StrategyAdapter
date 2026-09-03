@@ -1,0 +1,48 @@
+{
+  "$id": "https://psrc.dev/schema/1.1.0/runtime-log-record.schema.json",
+  "additionalProperties": false,
+  "properties": {
+    "fields": {
+      "additionalProperties": true,
+      "title": "Fields",
+      "type": "object"
+    },
+    "level": {
+      "enum": [
+        "debug",
+        "error",
+        "info",
+        "warning"
+      ],
+      "title": "Level",
+      "type": "string"
+    },
+    "message": {
+      "title": "Message",
+      "type": "string"
+    },
+    "sequence": {
+      "minimum": 0,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "stage": {
+      "title": "Stage",
+      "type": "string"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    }
+  },
+  "required": [
+    "level",
+    "message",
+    "sequence",
+    "stage",
+    "timestamp"
+  ],
+  "title": "RuntimeLogRecord",
+  "type": "object"
+}

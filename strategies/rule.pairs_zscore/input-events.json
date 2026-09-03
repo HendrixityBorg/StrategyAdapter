@@ -1,0 +1,342 @@
+[
+  {
+    "available_time": "2026-01-02T16:00:00Z",
+    "event_id": "pair:1",
+    "event_time": "2026-01-02T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-A",
+    "payload": {
+      "close": "100",
+      "high": "100.5",
+      "kind": "bar",
+      "low": "99.5",
+      "open": "100",
+      "volume": "1000"
+    },
+    "receive_time": "2026-01-02T16:00:00Z",
+    "sequence": 0,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-02T16:00:00Z",
+    "event_id": "pair:2",
+    "event_time": "2026-01-02T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-B",
+    "payload": {
+      "close": "50",
+      "high": "50.5",
+      "kind": "bar",
+      "low": "49.5",
+      "open": "50",
+      "volume": "1001"
+    },
+    "receive_time": "2026-01-02T16:00:00Z",
+    "sequence": 1,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-03T16:00:00Z",
+    "event_id": "pair:3",
+    "event_time": "2026-01-03T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-A",
+    "payload": {
+      "close": "101",
+      "high": "101.5",
+      "kind": "bar",
+      "low": "99.5",
+      "open": "100",
+      "volume": "1002"
+    },
+    "receive_time": "2026-01-03T16:00:00Z",
+    "sequence": 2,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-03T16:00:00Z",
+    "event_id": "pair:4",
+    "event_time": "2026-01-03T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-B",
+    "payload": {
+      "close": "50.5",
+      "high": "51.0",
+      "kind": "bar",
+      "low": "49.5",
+      "open": "50",
+      "volume": "1003"
+    },
+    "receive_time": "2026-01-03T16:00:00Z",
+    "sequence": 3,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-04T16:00:00Z",
+    "event_id": "pair:5",
+    "event_time": "2026-01-04T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-A",
+    "payload": {
+      "close": "102",
+      "high": "102.5",
+      "kind": "bar",
+      "low": "100.5",
+      "open": "101",
+      "volume": "1004"
+    },
+    "receive_time": "2026-01-04T16:00:00Z",
+    "sequence": 4,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-04T16:00:00Z",
+    "event_id": "pair:6",
+    "event_time": "2026-01-04T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-B",
+    "payload": {
+      "close": "51",
+      "high": "51.5",
+      "kind": "bar",
+      "low": "50.0",
+      "open": "50.5",
+      "volume": "1005"
+    },
+    "receive_time": "2026-01-04T16:00:00Z",
+    "sequence": 5,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-05T16:00:00Z",
+    "event_id": "pair:7",
+    "event_time": "2026-01-05T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-A",
+    "payload": {
+      "close": "101",
+      "high": "102.5",
+      "kind": "bar",
+      "low": "100.5",
+      "open": "102",
+      "volume": "1006"
+    },
+    "receive_time": "2026-01-05T16:00:00Z",
+    "sequence": 6,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-05T16:00:00Z",
+    "event_id": "pair:8",
+    "event_time": "2026-01-05T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-B",
+    "payload": {
+      "close": "50.5",
+      "high": "51.5",
+      "kind": "bar",
+      "low": "50.0",
+      "open": "51",
+      "volume": "1007"
+    },
+    "receive_time": "2026-01-05T16:00:00Z",
+    "sequence": 7,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-06T16:00:00Z",
+    "event_id": "pair:9",
+    "event_time": "2026-01-06T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-A",
+    "payload": {
+      "close": "100",
+      "high": "101.5",
+      "kind": "bar",
+      "low": "99.5",
+      "open": "101",
+      "volume": "1008"
+    },
+    "receive_time": "2026-01-06T16:00:00Z",
+    "sequence": 8,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-06T16:00:00Z",
+    "event_id": "pair:10",
+    "event_time": "2026-01-06T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-B",
+    "payload": {
+      "close": "50",
+      "high": "51.0",
+      "kind": "bar",
+      "low": "49.5",
+      "open": "50.5",
+      "volume": "1009"
+    },
+    "receive_time": "2026-01-06T16:00:00Z",
+    "sequence": 9,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-07T16:00:00Z",
+    "event_id": "pair:11",
+    "event_time": "2026-01-07T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-A",
+    "payload": {
+      "close": "101",
+      "high": "101.5",
+      "kind": "bar",
+      "low": "99.5",
+      "open": "100",
+      "volume": "1010"
+    },
+    "receive_time": "2026-01-07T16:00:00Z",
+    "sequence": 10,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-07T16:00:00Z",
+    "event_id": "pair:12",
+    "event_time": "2026-01-07T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-B",
+    "payload": {
+      "close": "50.5",
+      "high": "51.0",
+      "kind": "bar",
+      "low": "49.5",
+      "open": "50",
+      "volume": "1011"
+    },
+    "receive_time": "2026-01-07T16:00:00Z",
+    "sequence": 11,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-08T16:00:00Z",
+    "event_id": "pair:13",
+    "event_time": "2026-01-08T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-A",
+    "payload": {
+      "close": "108",
+      "high": "108.5",
+      "kind": "bar",
+      "low": "100.5",
+      "open": "101",
+      "volume": "1012"
+    },
+    "receive_time": "2026-01-08T16:00:00Z",
+    "sequence": 12,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-08T16:00:00Z",
+    "event_id": "pair:14",
+    "event_time": "2026-01-08T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-B",
+    "payload": {
+      "close": "50",
+      "high": "51.0",
+      "kind": "bar",
+      "low": "49.5",
+      "open": "50.5",
+      "volume": "1013"
+    },
+    "receive_time": "2026-01-08T16:00:00Z",
+    "sequence": 13,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-09T16:00:00Z",
+    "event_id": "pair:15",
+    "event_time": "2026-01-09T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-A",
+    "payload": {
+      "close": "105",
+      "high": "108.5",
+      "kind": "bar",
+      "low": "104.5",
+      "open": "108",
+      "volume": "1014"
+    },
+    "receive_time": "2026-01-09T16:00:00Z",
+    "sequence": 14,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-09T16:00:00Z",
+    "event_id": "pair:16",
+    "event_time": "2026-01-09T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-B",
+    "payload": {
+      "close": "51",
+      "high": "51.5",
+      "kind": "bar",
+      "low": "49.5",
+      "open": "50",
+      "volume": "1015"
+    },
+    "receive_time": "2026-01-09T16:00:00Z",
+    "sequence": 15,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-10T16:00:00Z",
+    "event_id": "pair:17",
+    "event_time": "2026-01-10T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-A",
+    "payload": {
+      "close": "99",
+      "high": "105.5",
+      "kind": "bar",
+      "low": "98.5",
+      "open": "105",
+      "volume": "1016"
+    },
+    "receive_time": "2026-01-10T16:00:00Z",
+    "sequence": 16,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-10T16:00:00Z",
+    "event_id": "pair:18",
+    "event_time": "2026-01-10T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-B",
+    "payload": {
+      "close": "52",
+      "high": "52.5",
+      "kind": "bar",
+      "low": "50.5",
+      "open": "51",
+      "volume": "1017"
+    },
+    "receive_time": "2026-01-10T16:00:00Z",
+    "sequence": 17,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-11T16:00:00Z",
+    "event_id": "pair:19",
+    "event_time": "2026-01-11T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-A",
+    "payload": {
+      "close": "96",
+      "high": "99.5",
+      "kind": "bar",
+      "low": "95.5",
+      "open": "99",
+      "volume": "1018"
+    },
+    "receive_time": "2026-01-11T16:00:00Z",
+    "sequence": 18,
+    "source": "synthetic.v1"
+  },
+  {
+    "available_time": "2026-01-11T16:00:00Z",
+    "event_id": "pair:20",
+    "event_time": "2026-01-11T16:00:00Z",
+    "instrument_id": "SYNTH.PAIR-B",
+    "payload": {
+      "close": "53",
+      "high": "53.5",
+      "kind": "bar",
+      "low": "51.5",
+      "open": "52",
+      "volume": "1019"
+    },
+    "receive_time": "2026-01-11T16:00:00Z",
+    "sequence": 19,
+    "source": "synthetic.v1"
+  }
+]
