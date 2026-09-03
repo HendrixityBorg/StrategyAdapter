@@ -5,10 +5,12 @@
 ## 策略包统一入口
 
 ```bash
-psrc run --strategy-dir <package> --output <report-directory>
+psrc run --strategy-dir <package> \
+  --engine <reference|backtrader|nautilus-trader> \
+  --output <report-directory>
 ```
 
-该入口从目录读取策略 manifest、数据 manifest、精确输入事件及可选训练请求。它必须在 import 前依次完成声明解析、输入内容哈希校验、能力编译和源码安全扫描，再根据生命周期使用同一 orchestrator 执行训练、内容寻址保存、完整性校验加载、推理和回测。目录格式见 [策略包规范](package.md)。
+该入口从目录读取策略 manifest、数据 manifest、精确输入事件及可选训练请求。它必须在 import 前依次完成声明解析、输入内容哈希校验、所选引擎能力编译和源码安全扫描，再根据生命周期使用同一 orchestrator 执行训练、内容寻址保存、完整性校验加载、推理和回测。`--engine` 默认为 `reference`；只有选定的引擎依赖和实现会被加载，能力不匹配时禁止替换引擎。目录格式见 [策略包规范](package.md)。
 
 ## 编译入口
 

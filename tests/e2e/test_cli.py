@@ -154,3 +154,59 @@ def test_package_cli_require_strict_never_downgrades(
         == 3
     )
     assert not output.exists()
+
+
+def test_package_cli_selects_each_executable_engine(tmp_path: Path) -> None:
+    packages = tmp_path / "packages"
+    assert main(["package", "export", "--output", str(packages)]) == 0
+
+    for engine_id in ("reference", "backtrader", "nautilus-trader"):
+        output = tmp_path / f"run-{engine_id}"
+        assert (
+            main(
+                [
+                    "run",
+                    "--strategy-dir",
+                    str(packages / "rule.sma_cross"),
+                    "--output",
+                    str(output),
+                    "--engine",
+                    engine_id,
+                ]
+            )
+            == 0
+        )
+        bundle = RunBundle.model_validate_json(
+            (output / "bundle.json").read_text(encoding="utf-8")
+        )
+        assert bundle.report.execution_plan.engine_id == engine_id
+        assert bundle.engine_capabilities.engine_id == engine_id
+        assert bundle.report.metrics.fills > 0
+
+
+def test_selected_engine_capability_failure_never_substitutes_reference(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    packages = tmp_path / "packages"
+    output = tmp_path / "unsupported-run"
+    assert main(["package", "export", "--output", str(packages)]) == 0
+    capsys.readouterr()
+
+    assert (
+        main(
+            [
+                "run",
+                "--strategy-dir",
+                str(packages / "rule.l1_microprice"),
+                "--output",
+                str(output),
+                "--engine",
+                "backtrader",
+            ]
+        )
+        == 3
+    )
+    error = json.loads(capsys.readouterr().out)
+    assert error["code"] == "ENGINE_CAPABILITY_UNSUPPORTED"
+    assert error["engine_id"] == "backtrader"
+    assert not output.exists()

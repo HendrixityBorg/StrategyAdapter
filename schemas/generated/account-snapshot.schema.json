@@ -166,7 +166,8 @@
       "type": "object"
     }
   },
-  "$id": "https://psrc.dev/schema/1.1.0/account-snapshot.schema.json",
+  "$id": "https://raw.githubusercontent.com/HendrixityBorg/StrategyAdapter/main/schemas/generated/account-snapshot.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
     "base_currency": {
@@ -201,14 +202,14 @@
     "open_orders": {
       "default": [],
       "items": {
-        "$ref": "https://psrc.dev/schema/1.1.0/definitions/OpenOrder"
+        "$ref": "#/$defs/OpenOrder"
       },
       "title": "Open Orders",
       "type": "array"
     },
     "positions": {
       "items": {
-        "$ref": "https://psrc.dev/schema/1.1.0/definitions/Position"
+        "$ref": "#/$defs/Position"
       },
       "title": "Positions",
       "type": "array"

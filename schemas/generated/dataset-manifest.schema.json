@@ -32,7 +32,7 @@
           "uniqueItems": true
         },
         "kind": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataKind"
+          "$ref": "#/$defs/DataKind"
         },
         "record_count": {
           "minimum": 0,
@@ -59,7 +59,7 @@
           "uniqueItems": true
         },
         "timeframe": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/Timeframe"
+          "$ref": "#/$defs/Timeframe"
         }
       },
       "required": [
@@ -102,7 +102,7 @@
           "title": "Interval"
         },
         "mode": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/TimeframeMode"
+          "$ref": "#/$defs/TimeframeMode"
         },
         "timezone": {
           "default": "UTC",
@@ -125,7 +125,8 @@
       "type": "string"
     }
   },
-  "$id": "https://psrc.dev/schema/1.1.0/dataset-manifest.schema.json",
+  "$id": "https://raw.githubusercontent.com/HendrixityBorg/StrategyAdapter/main/schemas/generated/dataset-manifest.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
     "contract_version": {
@@ -163,7 +164,7 @@
     },
     "streams": {
       "items": {
-        "$ref": "https://psrc.dev/schema/1.1.0/definitions/DatasetStream"
+        "$ref": "#/$defs/DatasetStream"
       },
       "title": "Streams",
       "type": "array"

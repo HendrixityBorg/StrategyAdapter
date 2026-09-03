@@ -45,7 +45,7 @@
           "title": "Depth"
         },
         "kind": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataKind"
+          "$ref": "#/$defs/DataKind"
         },
         "lookback": {
           "default": 1,
@@ -98,7 +98,7 @@
           "type": "array"
         },
         "timeframe": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/Timeframe"
+          "$ref": "#/$defs/Timeframe"
         }
       },
       "required": [
@@ -241,7 +241,7 @@
           "title": "Interval"
         },
         "mode": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/TimeframeMode"
+          "$ref": "#/$defs/TimeframeMode"
         },
         "timezone": {
           "default": "UTC",
@@ -264,13 +264,14 @@
       "type": "string"
     }
   },
-  "$id": "https://psrc.dev/schema/1.1.0/paper-strategy-spec.schema.json",
+  "$id": "https://raw.githubusercontent.com/HendrixityBorg/StrategyAdapter/main/schemas/generated/paper-strategy-spec.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
     "ambiguities": {
       "default": [],
       "items": {
-        "$ref": "https://psrc.dev/schema/1.1.0/definitions/PaperAmbiguity"
+        "$ref": "#/$defs/PaperAmbiguity"
       },
       "title": "Ambiguities",
       "type": "array"
@@ -282,7 +283,7 @@
     },
     "data_requirements": {
       "items": {
-        "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataRequirement"
+        "$ref": "#/$defs/DataRequirement"
       },
       "title": "Data Requirements",
       "type": "array"
@@ -320,14 +321,14 @@
     },
     "output_actions": {
       "items": {
-        "$ref": "https://psrc.dev/schema/1.1.0/definitions/ActionKind"
+        "$ref": "#/$defs/ActionKind"
       },
       "title": "Output Actions",
       "type": "array",
       "uniqueItems": true
     },
     "reference": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/PaperReference"
+      "$ref": "#/$defs/PaperReference"
     },
     "reward_definition": {
       "anyOf": [
@@ -347,7 +348,7 @@
       "type": "string"
     },
     "strategy_kind": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/StrategyKind"
+      "$ref": "#/$defs/StrategyKind"
     }
   },
   "required": [

@@ -1,5 +1,6 @@
 {
-  "$id": "https://psrc.dev/schema/1.1.0/runtime-log-record.schema.json",
+  "$id": "https://raw.githubusercontent.com/HendrixityBorg/StrategyAdapter/main/schemas/generated/runtime-log-record.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
     "fields": {

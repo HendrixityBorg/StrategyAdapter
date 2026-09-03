@@ -9,8 +9,11 @@ from typing import Any
 from xml.etree import ElementTree
 
 import yaml
+from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema.exceptions import SchemaError  # type: ignore[import-untyped]
 
 from psrc.adapters.profiles import discover_engine_profiles
+from psrc.constants import JSON_SCHEMA_DIALECT, SCHEMA_BASE_URI
 from psrc.contract.models import (
     StrategyCodeEvidence,
     StrategyKind,
@@ -35,6 +38,21 @@ REQUIRED_ERRORS = {
 
 def _json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _schema_references(value: Any) -> tuple[str, ...]:
+    if isinstance(value, dict):
+        own = (value["$ref"],) if isinstance(value.get("$ref"), str) else ()
+        return own + tuple(
+            reference
+            for item in value.values()
+            for reference in _schema_references(item)
+        )
+    if isinstance(value, list):
+        return tuple(
+            reference for item in value for reference in _schema_references(item)
+        )
+    return ()
 
 
 def verify_acceptance(
@@ -163,15 +181,31 @@ def verify_acceptance(
     schema_entries = schema_catalog.get("schemas", {})
     schema_issues: list[str] = []
     schema_ids: set[str] = set()
+    external_references: dict[str, list[str]] = {}
     for name, filename in schema_entries.items():
         schema_path = repository / "schemas/generated" / filename
         if not schema_path.is_file():
             schema_issues.append(f"{name}: missing {filename}")
             continue
         schema = _json(schema_path)
-        expected_id = f"https://psrc.dev/schema/{matrix.get('contract_version')}/{filename}"
+        expected_id = (
+            f"{SCHEMA_BASE_URI}/{filename}?contract={matrix.get('contract_version')}"
+        )
         if schema.get("$id") != expected_id:
             schema_issues.append(f"{name}: unexpected $id")
+        if schema.get("$schema") != JSON_SCHEMA_DIALECT:
+            schema_issues.append(f"{name}: unexpected or missing $schema")
+        try:
+            Draft202012Validator.check_schema(schema)
+        except SchemaError as exc:
+            schema_issues.append(f"{name}: invalid Draft 2020-12 schema: {exc.message}")
+        non_local = sorted(
+            reference
+            for reference in set(_schema_references(schema))
+            if not reference.startswith("#/$defs/")
+        )
+        if non_local:
+            external_references[name] = non_local
         schema_ids.add(str(schema.get("$id")))
     strategy_schema_path = repository / "schemas/generated/strategy-manifest.schema.json"
     strategy_schema_text = (
@@ -182,13 +216,17 @@ def verify_acceptance(
         "versioned_public_schemas",
         len(schema_entries) >= 22
         and not schema_issues
+        and not external_references
         and len(schema_ids) == len(schema_entries)
         and schema_catalog.get("contract_version") == matrix.get("contract_version")
         and extension_namespace_enforced,
         {
             "schema_count": len(schema_entries),
             "issues": schema_issues,
+            "external_references": external_references,
             "unique_ids": len(schema_ids),
+            "dialect": JSON_SCHEMA_DIALECT,
+            "standalone_references": not external_references,
             "reverse_dns_extensions_enforced": extension_namespace_enforced,
         },
     )

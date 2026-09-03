@@ -127,14 +127,14 @@
       "properties": {
         "asks": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/BookLevel"
+            "$ref": "#/$defs/BookLevel"
           },
           "title": "Asks",
           "type": "array"
         },
         "bids": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/BookLevel"
+            "$ref": "#/$defs/BookLevel"
           },
           "title": "Bids",
           "type": "array"
@@ -290,7 +290,8 @@
       "type": "object"
     }
   },
-  "$id": "https://psrc.dev/schema/1.1.0/market-event.schema.json",
+  "$id": "https://raw.githubusercontent.com/HendrixityBorg/StrategyAdapter/main/schemas/generated/market-event.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
     "available_time": {
@@ -316,25 +317,25 @@
     "payload": {
       "discriminator": {
         "mapping": {
-          "bar": "https://psrc.dev/schema/1.1.0/definitions/BarPayload",
-          "book_snapshot_l2": "https://psrc.dev/schema/1.1.0/definitions/BookSnapshotL2Payload",
-          "quote_l1": "https://psrc.dev/schema/1.1.0/definitions/QuoteL1Payload",
-          "trade": "https://psrc.dev/schema/1.1.0/definitions/TradePayload"
+          "bar": "#/$defs/BarPayload",
+          "book_snapshot_l2": "#/$defs/BookSnapshotL2Payload",
+          "quote_l1": "#/$defs/QuoteL1Payload",
+          "trade": "#/$defs/TradePayload"
         },
         "propertyName": "kind"
       },
       "oneOf": [
         {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/BarPayload"
+          "$ref": "#/$defs/BarPayload"
         },
         {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/TradePayload"
+          "$ref": "#/$defs/TradePayload"
         },
         {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/QuoteL1Payload"
+          "$ref": "#/$defs/QuoteL1Payload"
         },
         {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/BookSnapshotL2Payload"
+          "$ref": "#/$defs/BookSnapshotL2Payload"
         }
       ],
       "title": "Payload"

@@ -29,7 +29,8 @@
       "type": "object"
     }
   },
-  "$id": "https://psrc.dev/schema/1.1.0/strategy-code-evidence.schema.json",
+  "$id": "https://raw.githubusercontent.com/HendrixityBorg/StrategyAdapter/main/schemas/generated/strategy-code-evidence.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "description": "Content-addressed strategy package and trusted runtime implementation.",
   "properties": {
@@ -39,7 +40,7 @@
     },
     "package_files": {
       "items": {
-        "$ref": "https://psrc.dev/schema/1.1.0/definitions/SourceFileEvidence"
+        "$ref": "#/$defs/SourceFileEvidence"
       },
       "title": "Package Files",
       "type": "array"

@@ -12,9 +12,14 @@ from pydantic import BaseModel, ValidationError
 
 from psrc.adapters.reference import ReferenceEngine
 from psrc.adapters.reference import capabilities as reference_capabilities
+from psrc.adapters.registry import ENGINE_IDS, EngineId, resolve_adapter
 from psrc.authoring.audit import audit_manifest
 from psrc.authoring.models import AgentAuditReport, PaperStrategySpec
-from psrc.constants import CONTRACT_VERSION
+from psrc.constants import (
+    CONTRACT_VERSION,
+    JSON_SCHEMA_DIALECT,
+    SCHEMA_BASE_URI,
+)
 from psrc.contract.compiler import compile_run
 from psrc.contract.errors import ContractError, ContractViolation, ErrorCode, ErrorStage
 from psrc.contract.hashing import canonical_json_bytes, sha256_model
@@ -116,10 +121,11 @@ def _schema_export(output: Path) -> int:
     catalog: dict[str, str] = {}
     for name, model in SCHEMA_MODELS.items():
         filename = f"{name}.schema.json"
-        schema = model.model_json_schema(
-            ref_template=f"https://psrc.dev/schema/{CONTRACT_VERSION}/definitions/{{model}}"
+        schema = model.model_json_schema(ref_template="#/$defs/{model}")
+        schema["$schema"] = JSON_SCHEMA_DIALECT
+        schema["$id"] = (
+            f"{SCHEMA_BASE_URI}/{filename}?contract={CONTRACT_VERSION}"
         )
-        schema["$id"] = f"https://psrc.dev/schema/{CONTRACT_VERSION}/{filename}"
         _write_json(output / filename, _stable_schema_document(schema))
         catalog[name] = filename
     _write_json(output / "catalog.json", {"contract_version": CONTRACT_VERSION, "schemas": catalog})
@@ -284,12 +290,18 @@ def _selected_sandbox(*, require_strict: bool) -> SandboxMode:
 
 
 def _run_package(
-    package: StrategyPackage, output: Path, *, require_strict: bool = False
+    package: StrategyPackage,
+    output: Path,
+    *,
+    require_strict: bool = False,
+    engine_id: EngineId = "reference",
 ) -> RunReport:
     sandbox = _selected_sandbox(require_strict=require_strict)
-    engine_capabilities = reference_capabilities(
-        strict_container=sandbox == SandboxMode.STRICT_CONTAINER
+    resolved = resolve_adapter(
+        engine_id,
+        strict_container=sandbox == SandboxMode.STRICT_CONTAINER,
     )
+    engine_capabilities = resolved.capabilities
     policy = RunPolicy(required_sandbox=sandbox)
     dataset, events, training = _load_package_inputs(package)
     plan = compile_run(
@@ -307,7 +319,7 @@ def _run_package(
             strategy=cast(TrainableRuntimeStrategy, strategy),
             training=training,
             events=events,
-            engine=ReferenceEngine(),
+            engine=resolved.engine,
             store=ArtifactStore(output / "artifact-store"),
             sandbox_mode=sandbox,
         )
@@ -316,7 +328,7 @@ def _run_package(
             plan=plan,
             strategy=strategy,
             events=events,
-            engine=ReferenceEngine(),
+            engine=resolved.engine,
             sandbox_mode=sandbox,
         )
     write_run_bundle(report, output)
@@ -393,15 +405,26 @@ def _package_export(output: Path) -> int:
 
 
 def _run_strategy_directory(
-    strategy_dir: Path, output: Path, *, require_strict: bool
+    strategy_dir: Path,
+    output: Path,
+    *,
+    require_strict: bool,
+    engine_id: EngineId,
 ) -> int:
     package = load_strategy_manifest(strategy_dir)
-    report = _run_package(package, output, require_strict=require_strict)
+    report = _run_package(
+        package,
+        output,
+        require_strict=require_strict,
+        engine_id=engine_id,
+    )
     print(report.model_dump_json(indent=2))
     return 0
 
 
-def _run_strategy_in_docker(strategy_dir: Path, output: Path) -> int:
+def _run_strategy_in_docker(
+    strategy_dir: Path, output: Path, *, engine_id: EngineId
+) -> int:
     """Launch exactly one package in the attested strict-container boundary."""
     package = load_strategy_manifest(strategy_dir)
     DockerSandbox.require_available(
@@ -427,6 +450,8 @@ def _run_strategy_in_docker(strategy_dir: Path, output: Path) -> int:
                 "--output",
                 "/psrc/reports",
                 "--require-strict",
+                "--engine",
+                engine_id,
             ),
         )
     if result.stdout:
@@ -550,6 +575,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--strategy-dir", type=Path, required=True)
     run.add_argument("--output", type=Path, required=True)
     run.add_argument("--require-strict", action="store_true")
+    run.add_argument("--engine", choices=ENGINE_IDS, default="reference")
 
     sandbox = commands.add_parser("sandbox", help="run strategy packages in Docker isolation")
     sandbox_commands = sandbox.add_subparsers(dest="sandbox_command", required=True)
@@ -558,6 +584,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     sandbox_run.add_argument("--strategy-dir", type=Path, required=True)
     sandbox_run.add_argument("--output", type=Path, required=True)
+    sandbox_run.add_argument("--engine", choices=ENGINE_IDS, default="reference")
 
     author = commands.add_parser("author", help="audit paper-derived strategy metadata")
     author_commands = author.add_subparsers(dest="author_command", required=True)
@@ -614,10 +641,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _package_export(args.output)
         if args.command == "run":
             return _run_strategy_directory(
-                args.strategy_dir, args.output, require_strict=args.require_strict
+                args.strategy_dir,
+                args.output,
+                require_strict=args.require_strict,
+                engine_id=args.engine,
             )
         if args.command == "sandbox" and args.sandbox_command == "run":
-            return _run_strategy_in_docker(args.strategy_dir, args.output)
+            return _run_strategy_in_docker(
+                args.strategy_dir,
+                args.output,
+                engine_id=args.engine,
+            )
         if args.command == "author" and args.author_command == "audit":
             return _author_audit(args.spec, args.manifest, args.output)
         if args.command == "verify":

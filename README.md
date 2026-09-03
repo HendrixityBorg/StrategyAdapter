@@ -46,6 +46,7 @@ GitHub Actions 同时运行开发环境和严格容器验证，并将两类完�
 - 18 个有实质差异的策略示例，每类 6 个，覆盖分钟/日线、配对、截面、L1、L2 与执行任务；
 - 12 个可训练策略均执行训练、内容寻址保存、完整性校验重载，再进入推理/回测；
 - 18 个目录均可通过 `psrc run --strategy-dir` 独立执行；manifest、输入和源码哈希先验证、能力先协商、源码先扫描，之后才允许 import；
+- 端到端测试会动态组装规则、监督学习和强化学习三类外部策略包，其源码不引用内置 strategy catalog，仍通过同一目录入口完成运行；
 - 每份策略运行计划均绑定包源码和受信运行时源码树哈希，Bundle 独立保存逐文件策略源码证据；
 - 显式、可禁用且实际执行的兼容转换，包括无损标的映射与具有源/有效事件哈希和数量证据的 bar 重采样；
 - 字段、时间周期、标的映射、模型、非法动作、非法订单、训练和回测 8 类结构化失败证据；
@@ -86,7 +87,10 @@ uv sync --frozen --extra dev --extra adapters
 uv run psrc schema export --output schemas/generated
 uv run psrc package export --output strategies
 uv run psrc run --strategy-dir strategies/rule.sma_cross --output runs/package-sma
-uv run psrc sandbox run --strategy-dir strategies/rule.sma_cross --output runs/strict-sma
+uv run psrc run --strategy-dir strategies/rule.sma_cross \
+  --engine backtrader --output runs/package-sma-backtrader
+uv run psrc sandbox run --strategy-dir strategies/rule.sma_cross \
+  --engine nautilus-trader --output runs/strict-sma-nautilus
 uv run psrc author audit --spec paper-spec.json \
   --manifest strategies/rule.sma_cross/strategy.yaml --output agent-audit.json
 uv run psrc demo all --output runs/all
@@ -98,7 +102,9 @@ uv run psrc verify --matrix ACCEPTANCE_MATRIX.yaml \
   --output reports/generated/acceptance-report.json
 ```
 
-`psrc sandbox run` 是宿主机发起的单策略严格 Docker 入口。直接运行或批量运行需要拒绝开发模式时增加 `--require-strict`；如果真实容器控制无法证明，命令返回 `SANDBOX_UNAVAILABLE`，不会降级执行。策略 manifest 的 `resources.sandbox` 是最低要求，`RunPolicy` 低于它时返回 `SANDBOX_POLICY_DOWNGRADE`。
+`psrc run --engine` 明确选择 `reference`、`backtrader` 或 `nautilus-trader`，默认为 `reference`。选定引擎的数据、动作或能力不足时编译阶段直接返回结构化错误，不会改用参考引擎。`psrc sandbox run` 是宿主机发起的单策略严格 Docker 入口，会把同一引擎选择送入容器。直接运行或批量运行需要拒绝开发模式时增加 `--require-strict`；如果真实容器控制无法证明，命令返回 `SANDBOX_UNAVAILABLE`，不会降级执行。策略 manifest 的 `resources.sandbox` 是最低要求，`RunPolicy` 低于它时返回 `SANDBOX_POLICY_DOWNGRADE`。
+
+全部 22 份 JSON Schema 声明 Draft 2020-12，内部引用使用自包含的 `#/$defs/...`。默认验证门禁会用标准 `jsonschema` 实现对 22 类真实文档逐份验证，不需要网络或外部 Schema registry。
 
 证据验证器不根据矩阵中的说明性文字判定结果，而是从实际生成物中核验 Schema、策略数量与差异度、训练产物、失败码、原生引擎、测试、覆盖率、沙箱控制以及证据运行模式。
 

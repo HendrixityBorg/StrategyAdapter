@@ -145,6 +145,8 @@ def test_single_package_sandbox_cli_uses_production_docker_boundary(
                 str(packages / "rule.sma_cross"),
                 "--output",
                 str(output),
+                "--engine",
+                "nautilus-trader",
             ]
         )
         == 0
@@ -157,6 +159,8 @@ def test_single_package_sandbox_cli_uses_production_docker_boundary(
         "--output",
         "/psrc/reports",
         "--require-strict",
+        "--engine",
+        "nautilus-trader",
     )
     mounts = captured["mounts"]
     assert isinstance(mounts, ContainerMounts)

@@ -29,6 +29,7 @@ criteria:
       - spec/package.md
       - spec/errors.md
       - schemas/generated
+      - tests/e2e/test_json_schema_interop.py
       - src/psrc/contract
       - src/psrc/domain
       - src/psrc/runtime
@@ -78,6 +79,7 @@ criteria:
       - tests
       - src/psrc/sandbox
       - src/psrc/adapters
+      - src/psrc/adapters/registry.py
       - engine_profiles
       - tests/adapters
       - tests/integration/test_strategy_packages.py

@@ -49,7 +49,7 @@
           "type": "string"
         },
         "result": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/CompatibilityResult"
+          "$ref": "#/$defs/CompatibilityResult"
         },
         "reversible": {
           "title": "Reversible",
@@ -100,12 +100,13 @@
       "type": "string"
     }
   },
-  "$id": "https://psrc.dev/schema/1.1.0/execution-plan.schema.json",
+  "$id": "https://raw.githubusercontent.com/HendrixityBorg/StrategyAdapter/main/schemas/generated/execution-plan.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
     "compatibility": {
       "items": {
-        "$ref": "https://psrc.dev/schema/1.1.0/definitions/CompatibilityRecord"
+        "$ref": "#/$defs/CompatibilityRecord"
       },
       "title": "Compatibility",
       "type": "array"

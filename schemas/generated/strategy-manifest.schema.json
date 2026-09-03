@@ -18,7 +18,7 @@
       "properties": {
         "allowed": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/ActionKind"
+            "$ref": "#/$defs/ActionKind"
           },
           "title": "Allowed",
           "type": "array",
@@ -97,7 +97,7 @@
           "title": "Depth"
         },
         "kind": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataKind"
+          "$ref": "#/$defs/DataKind"
         },
         "lookback": {
           "default": 1,
@@ -150,7 +150,7 @@
           "type": "array"
         },
         "timeframe": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/Timeframe"
+          "$ref": "#/$defs/Timeframe"
         }
       },
       "required": [
@@ -183,7 +183,7 @@
           "type": "boolean"
         },
         "training": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/TrainingMode"
+          "$ref": "#/$defs/TrainingMode"
         }
       },
       "required": [
@@ -242,7 +242,7 @@
           "type": "integer"
         },
         "sandbox": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/SandboxMode",
+          "$ref": "#/$defs/SandboxMode",
           "default": "strict_container"
         },
         "timeout_seconds": {
@@ -300,7 +300,7 @@
           "title": "Interval"
         },
         "mode": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/TimeframeMode"
+          "$ref": "#/$defs/TimeframeMode"
         },
         "timezone": {
           "default": "UTC",
@@ -331,11 +331,12 @@
       "type": "string"
     }
   },
-  "$id": "https://psrc.dev/schema/1.1.0/strategy-manifest.schema.json",
+  "$id": "https://raw.githubusercontent.com/HendrixityBorg/StrategyAdapter/main/schemas/generated/strategy-manifest.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
     "action_requirements": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/ActionRequirements"
+      "$ref": "#/$defs/ActionRequirements"
     },
     "contract_version": {
       "default": "1.1.0",
@@ -344,7 +345,7 @@
     },
     "data_requirements": {
       "items": {
-        "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataRequirement"
+        "$ref": "#/$defs/DataRequirement"
       },
       "title": "Data Requirements",
       "type": "array"
@@ -369,10 +370,10 @@
       "type": "object"
     },
     "kind": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/StrategyKind"
+      "$ref": "#/$defs/StrategyKind"
     },
     "lifecycle": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/LifecycleRequirements"
+      "$ref": "#/$defs/LifecycleRequirements"
     },
     "required_profiles": {
       "items": {
@@ -384,7 +385,7 @@
       "uniqueItems": true
     },
     "resources": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/ResourcePolicy",
+      "$ref": "#/$defs/ResourcePolicy",
       "default": {
         "allowed_imports": [
           "math",

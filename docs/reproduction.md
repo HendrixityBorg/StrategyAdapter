@@ -59,20 +59,24 @@ make acceptance
 ```bash
 uv run psrc sandbox run \
   --strategy-dir strategies/rule.sma_cross \
+  --engine nautilus-trader \
   --output reports/single-strict-run
 ```
+
+不需要严格容器时，同一目录可以用 `psrc run --engine` 分别送入 Reference、Backtrader 和 NautilusTrader。评审者可比较各自 `bundle.json` 中的 `engine_capabilities`、执行语义、成交与假设，而不应要求不同成交模型产生完全相同的 PnL。
 
 项目不使用私有数据、账户、API Key 或外部服务。全部 fixture 都是确定性生成的合成事件，并具有 manifest 内容哈希。
 
 ## 预期证据下限
 
-- 至少 22 份 JSON Schema；
+- 至少 22 份自包含 Draft 2020-12 JSON Schema，标准验证器对 22 类真实文档全部通过；
 - 18 个策略包及运行，严格为规则 6 + 监督学习 6 + 强化学习 6；
 - 12 份保存后重载的模型/策略产物；
 - 8 个结构化强制失败场景；
 - 3 个 `CONFORMANCE_VERIFIED` 原生引擎和 3 个 `PROFILED` 引擎设计；
 - 至少 50 项测试，失败、错误、跳过均为 0，代码覆盖率不低于 90%；
 - 所有 18 个策略包均从目录源码入口执行，具有精确源输入、有效输入及源码证据；
+- 额外动态组装三类不依赖内置 catalog 的外部策略源码，均通过目录入口，两个可训练示例还必须产生并重载产物；
 - 所有 18 个运行均产生决策、订单和至少一笔成交；
 - 严格验证要求全部运行均为 `strict_container`，开发预验收不能冒充严格证据。
 

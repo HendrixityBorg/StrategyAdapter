@@ -45,7 +45,7 @@ Python 类型是参考 SDK。生成的 JSON Schema 与生命周期消息语义�
 
 分钟和日线 bar 使用 `PT1M`、`P1D` 等 ISO-8601 duration，并同时声明时区、日历和对齐方式。tick 类数据使用 `mode=event`，不得声明 bar interval。
 
-所有对象拒绝未知核心字段。JSON 是线传输/存储格式，YAML 可用于人工编写声明。`schemas/generated/` 中具有稳定 `$id` 的 Schema 是 Contract `1.1.0` 的规范机器表示；历史 `v1.0.0` Release 保持不可变。
+所有对象拒绝未知核心字段。JSON 是线传输/存储格式，YAML 可用于人工编写声明。`schemas/generated/` 中具有稳定 `$id` 的 Schema 是 Contract `1.1.0` 的规范机器表示；历史 `v1.0.0` Release 保持不可变。每份 Schema 明确声明 JSON Schema Draft 2020-12，所有内部 `$ref` 均指向本文档的 `#/$defs`，因此标准验证器无需网络或外部 registry 即可验证实例。
 
 `StrategyCodeEvidence` 是 `1.1.0` 新增的可选线对象：它列出策略包 Python 文件的路径、大小和 SHA-256，并记录受信运行时源码树哈希。`ExecutionPlan.strategy_code_evidence_sha256` 绑定整个证据对象，当前完整验证要求新生成的 Bundle 包含它；字段保持可选是为了让 `1.0.0` 文档继续可读。
 

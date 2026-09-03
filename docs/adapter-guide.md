@@ -13,6 +13,14 @@
 
 `RunPolicy.minimum_engine_support` 默认为 `ADAPTER_AVAILABLE`。只有操作者显式降低策略时，`PROFILED` 引擎才可用于离线兼容性分析；本运行时不会执行它。
 
+可执行引擎通过同一策略目录入口选择：
+
+```bash
+psrc run --strategy-dir <package> --engine backtrader --output <report-directory>
+```
+
+引擎解析是显式的；依赖缺失返回 `ENGINE_DEPENDENCY_MISSING`，能力不足返回 `ENGINE_CAPABILITY_UNSUPPORTED`，两者都不会回退到 Reference。
+
 ## 新增适配器的必要步骤
 
 1. 映射每一种规范数据类型，不得伪造缺失信息。

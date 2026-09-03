@@ -35,14 +35,14 @@
         "open_orders": {
           "default": [],
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/OpenOrder"
+            "$ref": "#/$defs/OpenOrder"
           },
           "title": "Open Orders",
           "type": "array"
         },
         "positions": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/Position"
+            "$ref": "#/$defs/Position"
           },
           "title": "Positions",
           "type": "array"
@@ -80,7 +80,7 @@
       "properties": {
         "allowed": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/ActionKind"
+            "$ref": "#/$defs/ActionKind"
           },
           "title": "Allowed",
           "type": "array",
@@ -188,7 +188,7 @@
         },
         "files": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/ArtifactFile"
+            "$ref": "#/$defs/ArtifactFile"
           },
           "title": "Files",
           "type": "array"
@@ -378,14 +378,14 @@
       "properties": {
         "asks": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/BookLevel"
+            "$ref": "#/$defs/BookLevel"
           },
           "title": "Asks",
           "type": "array"
         },
         "bids": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/BookLevel"
+            "$ref": "#/$defs/BookLevel"
           },
           "title": "Bids",
           "type": "array"
@@ -480,7 +480,7 @@
           "type": "string"
         },
         "result": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/CompatibilityResult"
+          "$ref": "#/$defs/CompatibilityResult"
         },
         "reversible": {
           "title": "Reversible",
@@ -562,7 +562,7 @@
           "title": "Depth"
         },
         "kind": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataKind"
+          "$ref": "#/$defs/DataKind"
         },
         "lookback": {
           "default": 1,
@@ -615,7 +615,7 @@
           "type": "array"
         },
         "timeframe": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/Timeframe"
+          "$ref": "#/$defs/Timeframe"
         }
       },
       "required": [
@@ -665,7 +665,7 @@
         },
         "streams": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/DatasetStream"
+            "$ref": "#/$defs/DatasetStream"
           },
           "title": "Streams",
           "type": "array"
@@ -698,7 +698,7 @@
           "uniqueItems": true
         },
         "kind": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataKind"
+          "$ref": "#/$defs/DataKind"
         },
         "record_count": {
           "minimum": 0,
@@ -725,7 +725,7 @@
           "uniqueItems": true
         },
         "timeframe": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/Timeframe"
+          "$ref": "#/$defs/Timeframe"
         }
       },
       "required": [
@@ -748,37 +748,37 @@
           "items": {
             "discriminator": {
               "mapping": {
-                "cancel_order": "https://psrc.dev/schema/1.1.0/definitions/CancelOrder",
-                "no_op": "https://psrc.dev/schema/1.1.0/definitions/NoOp",
-                "prediction": "https://psrc.dev/schema/1.1.0/definitions/Prediction",
-                "replace_order": "https://psrc.dev/schema/1.1.0/definitions/ReplaceOrder",
-                "submit_order": "https://psrc.dev/schema/1.1.0/definitions/SubmitOrder",
-                "target_position": "https://psrc.dev/schema/1.1.0/definitions/TargetPosition",
-                "target_weight": "https://psrc.dev/schema/1.1.0/definitions/TargetWeight"
+                "cancel_order": "#/$defs/CancelOrder",
+                "no_op": "#/$defs/NoOp",
+                "prediction": "#/$defs/Prediction",
+                "replace_order": "#/$defs/ReplaceOrder",
+                "submit_order": "#/$defs/SubmitOrder",
+                "target_position": "#/$defs/TargetPosition",
+                "target_weight": "#/$defs/TargetWeight"
               },
               "propertyName": "kind"
             },
             "oneOf": [
               {
-                "$ref": "https://psrc.dev/schema/1.1.0/definitions/NoOp"
+                "$ref": "#/$defs/NoOp"
               },
               {
-                "$ref": "https://psrc.dev/schema/1.1.0/definitions/Prediction"
+                "$ref": "#/$defs/Prediction"
               },
               {
-                "$ref": "https://psrc.dev/schema/1.1.0/definitions/TargetPosition"
+                "$ref": "#/$defs/TargetPosition"
               },
               {
-                "$ref": "https://psrc.dev/schema/1.1.0/definitions/TargetWeight"
+                "$ref": "#/$defs/TargetWeight"
               },
               {
-                "$ref": "https://psrc.dev/schema/1.1.0/definitions/SubmitOrder"
+                "$ref": "#/$defs/SubmitOrder"
               },
               {
-                "$ref": "https://psrc.dev/schema/1.1.0/definitions/CancelOrder"
+                "$ref": "#/$defs/CancelOrder"
               },
               {
-                "$ref": "https://psrc.dev/schema/1.1.0/definitions/ReplaceOrder"
+                "$ref": "#/$defs/ReplaceOrder"
               }
             ]
           },
@@ -815,7 +815,7 @@
       "properties": {
         "action_kinds": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/ActionKind"
+            "$ref": "#/$defs/ActionKind"
           },
           "title": "Action Kinds",
           "type": "array",
@@ -832,7 +832,7 @@
         },
         "data_kinds": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataKind"
+            "$ref": "#/$defs/DataKind"
           },
           "title": "Data Kinds",
           "type": "array",
@@ -848,7 +848,7 @@
           "type": "string"
         },
         "execution": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/ExecutionSemantics"
+          "$ref": "#/$defs/ExecutionSemantics"
         },
         "extensions": {
           "patternProperties": {
@@ -872,14 +872,14 @@
         "sandbox_modes": {
           "default": [],
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/SandboxMode"
+            "$ref": "#/$defs/SandboxMode"
           },
           "title": "Sandbox Modes",
           "type": "array",
           "uniqueItems": true
         },
         "support_level": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/SupportLevel"
+          "$ref": "#/$defs/SupportLevel"
         }
       },
       "required": [
@@ -900,7 +900,7 @@
       "properties": {
         "compatibility": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/CompatibilityRecord"
+            "$ref": "#/$defs/CompatibilityRecord"
           },
           "title": "Compatibility",
           "type": "array"
@@ -1151,7 +1151,7 @@
           "type": "boolean"
         },
         "training": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/TrainingMode"
+          "$ref": "#/$defs/TrainingMode"
         }
       },
       "required": [
@@ -1186,25 +1186,25 @@
         "payload": {
           "discriminator": {
             "mapping": {
-              "bar": "https://psrc.dev/schema/1.1.0/definitions/BarPayload",
-              "book_snapshot_l2": "https://psrc.dev/schema/1.1.0/definitions/BookSnapshotL2Payload",
-              "quote_l1": "https://psrc.dev/schema/1.1.0/definitions/QuoteL1Payload",
-              "trade": "https://psrc.dev/schema/1.1.0/definitions/TradePayload"
+              "bar": "#/$defs/BarPayload",
+              "book_snapshot_l2": "#/$defs/BookSnapshotL2Payload",
+              "quote_l1": "#/$defs/QuoteL1Payload",
+              "trade": "#/$defs/TradePayload"
             },
             "propertyName": "kind"
           },
           "oneOf": [
             {
-              "$ref": "https://psrc.dev/schema/1.1.0/definitions/BarPayload"
+              "$ref": "#/$defs/BarPayload"
             },
             {
-              "$ref": "https://psrc.dev/schema/1.1.0/definitions/TradePayload"
+              "$ref": "#/$defs/TradePayload"
             },
             {
-              "$ref": "https://psrc.dev/schema/1.1.0/definitions/QuoteL1Payload"
+              "$ref": "#/$defs/QuoteL1Payload"
             },
             {
-              "$ref": "https://psrc.dev/schema/1.1.0/definitions/BookSnapshotL2Payload"
+              "$ref": "#/$defs/BookSnapshotL2Payload"
             }
           ],
           "title": "Payload"
@@ -1786,7 +1786,7 @@
           "type": "integer"
         },
         "sandbox": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/SandboxMode",
+          "$ref": "#/$defs/SandboxMode",
           "default": "strict_container"
         },
         "timeout_seconds": {
@@ -1820,7 +1820,7 @@
         },
         "effective_events": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/MarketEvent"
+            "$ref": "#/$defs/MarketEvent"
           },
           "title": "Effective Events",
           "type": "array"
@@ -1832,7 +1832,7 @@
         },
         "source_events": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/MarketEvent"
+            "$ref": "#/$defs/MarketEvent"
           },
           "title": "Source Events",
           "type": "array"
@@ -1967,11 +1967,11 @@
           "uniqueItems": true
         },
         "minimum_engine_support": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/SupportLevel",
+          "$ref": "#/$defs/SupportLevel",
           "default": "ADAPTER_AVAILABLE"
         },
         "required_sandbox": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/SandboxMode",
+          "$ref": "#/$defs/SandboxMode",
           "default": "strict_container"
         },
         "strict": {
@@ -1998,7 +1998,7 @@
       "properties": {
         "account_snapshots": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/AccountSnapshot"
+            "$ref": "#/$defs/AccountSnapshot"
           },
           "title": "Account Snapshots",
           "type": "array"
@@ -2006,7 +2006,7 @@
         "artifacts": {
           "default": [],
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/ArtifactManifest"
+            "$ref": "#/$defs/ArtifactManifest"
           },
           "title": "Artifacts",
           "type": "array"
@@ -2025,7 +2025,7 @@
         },
         "decisions": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/DecisionRecord"
+            "$ref": "#/$defs/DecisionRecord"
           },
           "title": "Decisions",
           "type": "array"
@@ -2040,11 +2040,11 @@
           "type": "array"
         },
         "execution_plan": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/ExecutionPlan"
+          "$ref": "#/$defs/ExecutionPlan"
         },
         "fills": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/Fill"
+            "$ref": "#/$defs/Fill"
           },
           "title": "Fills",
           "type": "array"
@@ -2065,17 +2065,17 @@
         "logs": {
           "default": [],
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/RuntimeLogRecord"
+            "$ref": "#/$defs/RuntimeLogRecord"
           },
           "title": "Logs",
           "type": "array"
         },
         "metrics": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/RunMetrics"
+          "$ref": "#/$defs/RunMetrics"
         },
         "orders": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/OrderEventRecord"
+            "$ref": "#/$defs/OrderEventRecord"
           },
           "title": "Orders",
           "type": "array"
@@ -2086,7 +2086,7 @@
           "type": "string"
         },
         "sandbox_mode": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/SandboxMode"
+          "$ref": "#/$defs/SandboxMode"
         },
         "started_at": {
           "format": "date-time",
@@ -2209,7 +2209,7 @@
         },
         "package_files": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/SourceFileEvidence"
+            "$ref": "#/$defs/SourceFileEvidence"
           },
           "title": "Package Files",
           "type": "array"
@@ -2264,7 +2264,7 @@
       "additionalProperties": false,
       "properties": {
         "action_requirements": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/ActionRequirements"
+          "$ref": "#/$defs/ActionRequirements"
         },
         "contract_version": {
           "default": "1.1.0",
@@ -2273,7 +2273,7 @@
         },
         "data_requirements": {
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/DataRequirement"
+            "$ref": "#/$defs/DataRequirement"
           },
           "title": "Data Requirements",
           "type": "array"
@@ -2298,10 +2298,10 @@
           "type": "object"
         },
         "kind": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/StrategyKind"
+          "$ref": "#/$defs/StrategyKind"
         },
         "lifecycle": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/LifecycleRequirements"
+          "$ref": "#/$defs/LifecycleRequirements"
         },
         "required_profiles": {
           "items": {
@@ -2313,7 +2313,7 @@
           "uniqueItems": true
         },
         "resources": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/ResourcePolicy",
+          "$ref": "#/$defs/ResourcePolicy",
           "default": {
             "allowed_imports": [
               "math",
@@ -2585,7 +2585,7 @@
           "title": "Interval"
         },
         "mode": {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/TimeframeMode"
+          "$ref": "#/$defs/TimeframeMode"
         },
         "timezone": {
           "default": "UTC",
@@ -2726,7 +2726,7 @@
         "transitions": {
           "default": [],
           "items": {
-            "$ref": "https://psrc.dev/schema/1.1.0/definitions/RLTransition"
+            "$ref": "#/$defs/RLTransition"
           },
           "title": "Transitions",
           "type": "array"
@@ -2741,7 +2741,8 @@
       "type": "object"
     }
   },
-  "$id": "https://psrc.dev/schema/1.1.0/run-bundle.schema.json",
+  "$id": "https://raw.githubusercontent.com/HendrixityBorg/StrategyAdapter/main/schemas/generated/run-bundle.schema.json?contract=1.1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "properties": {
     "contract_version": {
@@ -2750,24 +2751,24 @@
       "type": "string"
     },
     "dataset_manifest": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/DatasetManifest"
+      "$ref": "#/$defs/DatasetManifest"
     },
     "engine_capabilities": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/EngineCapabilities"
+      "$ref": "#/$defs/EngineCapabilities"
     },
     "input_evidence": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/RunInputEvidence"
+      "$ref": "#/$defs/RunInputEvidence"
     },
     "report": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/RunReport"
+      "$ref": "#/$defs/RunReport"
     },
     "run_policy": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/RunPolicy"
+      "$ref": "#/$defs/RunPolicy"
     },
     "strategy_code_evidence": {
       "anyOf": [
         {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/StrategyCodeEvidence"
+          "$ref": "#/$defs/StrategyCodeEvidence"
         },
         {
           "type": "null"
@@ -2776,12 +2777,12 @@
       "default": null
     },
     "strategy_manifest": {
-      "$ref": "https://psrc.dev/schema/1.1.0/definitions/StrategyManifest"
+      "$ref": "#/$defs/StrategyManifest"
     },
     "training_request": {
       "anyOf": [
         {
-          "$ref": "https://psrc.dev/schema/1.1.0/definitions/TrainingRequest"
+          "$ref": "#/$defs/TrainingRequest"
         },
         {
           "type": "null"
